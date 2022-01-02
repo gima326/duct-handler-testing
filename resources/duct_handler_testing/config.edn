@@ -1,0 +1,23 @@
+{:duct.profile/base
+ {:duct.core/project-ns duct-handler-testing
+
+  ;; add
+  :duct.router/cascading
+  [#ig/ref :duct-handler-testing.handler/routing]
+
+  :duct-handler-testing.handler/routing
+  {:db #ig/ref :duct.database/sql}
+
+  }
+
+ :duct.profile/dev   #duct/include "dev"
+ :duct.profile/local #duct/include "local"
+ :duct.profile/prod  {}
+
+ :duct.module/logging {}
+
+ ;; add
+ :duct.module/web {}
+ :duct.module/sql
+ {:database-url "jdbc:mysql://localhost:3306/test2?user=root&password=password"}
+}
