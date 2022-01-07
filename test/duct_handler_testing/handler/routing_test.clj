@@ -7,7 +7,7 @@
             [duct.core :as duct]
             [integrant.core :as ig]
             [shrubbery.core :as shrubbery]
-            [duct-handler-testing.spec.user :as s.user]
+;;            [duct-handler-testing.spec.user :as s.user]
             ))
 
 ;;============================================================
@@ -29,7 +29,10 @@
 (deftest route-test
   (let [hndlr (ig/init-key
                 :duct-handler-testing.handler/routing
-                {:db database-stub})]
+
+                ;; {:db database-stub}
+                {:db {:spec database-stub}}
+                )]
 
     (testing "route -not-found-"
       (let[{:keys [status, body]}
