@@ -11,7 +11,6 @@
 
             ;; add
             [compojure.core :refer [GET POST routes]]
-            ;; add2
             [compojure.route :as route]))
 
 (defn error-message-line [err-msg]
@@ -40,9 +39,16 @@
 (defn user-form [action user & {:keys [error-messages]}]
   [:form {:action action :method "post"}
 
-   (foo-fn user "name" error-messages)
-   (foo-fn user "email" error-messages)
-   (foo-fn user "age" error-messages)
+;;   (foo-mac user "name" error-messages)
+;;   (foo-mac user "email" error-messages)
+;;   (foo-mac user "age" error-messages)
+
+;; マクロを for のなか使うと、意図しない挙動になるみたい。
+;;   (for [field ["name" "email" "age"]]
+;;     (foo-mac user field error-messages))
+
+   (for [field ["name" "email" "age"]]
+     (foo-fn user field error-messages))
 
    [:div
     [:a {:href "/users"} "show"]]
@@ -101,7 +107,7 @@
   (if (s.user/valid? params)
     (let [rslt (first (db.users/create-user db params))]
       (redirect (str "/users/" (:generated_key rslt))))
-      (new-user-view params (s.user/error-messages params))))
+    (new-user-view params (s.user/error-messages params))))
 
 (defn upd [db id {:keys [params]}]
   (if (and
@@ -112,17 +118,19 @@
 
 ;;============================================================
 
-(defmethod ig/init-key :duct-handler-testing.handler/routing [_ {:keys [db]}]
-　(routes
+;;(defmethod ig/init-key :duct-handler-testing.handler/routing [_ {:keys [db]}]
+(defmethod ig/init-key :duct-handler-testing.handler/routing [_ duct-db]
+ (let [spec (get-in duct-db [:db :spec])]
+  (routes
    (GET  "/example"          []   (html [:span "This is an example handler"]))
    (GET  "/new"              []   (new-user-view nil nil))
-   (POST "/new"              []   #(ins db %))
-   (GET  "/users"            []   (show-users-view (db.users/get-users db)))
-   (GET  "/users/:id"        [id] (show-user-view (first (db.users/get-user db id))))
-   (GET  "/users/:id/edit"   [id] (edit db id))
-   (POST "/users/:id/delete" [id] (del db id))
-   (POST "/users/:id/update" [id] #(upd db id %))
+   (POST "/new"              []   #(ins spec %))
+   (GET  "/users"            []   (show-users-view (db.users/get-users spec)))
+   (GET  "/users/:id"        [id] (show-user-view (first (db.users/get-user spec id))))
+   (GET  "/users/:id/edit"   [id] (edit spec id))
+   (POST "/users/:id/delete" [id] (del spec id))
+   (POST "/users/:id/update" [id] #(upd spec id %))
 
    ;; switch 文の else のように
    (route/not-found "Not Found")
-   ))
+   )))
