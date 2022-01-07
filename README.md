@@ -95,6 +95,7 @@ But you can also run tests (with keywords) through Leiningen.
                                    [phrase "0.3-alpha4"]
                                    [ring/ring-mock "0.3.2"]
                                    [com.gearswithingears/shrubbery "0.4.1"]]
+                                   
                   ;; add2
                   ;; テストコードに追加したキーワード（:static など）と一致させること。
                   ;; キーワードに該当するテストのみ、部分的に実行できる。
