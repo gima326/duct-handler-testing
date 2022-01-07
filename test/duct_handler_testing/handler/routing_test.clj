@@ -26,13 +26,13 @@
 
 ;;============================================================
 
-(deftest route-test
-  (let [hndlr (ig/init-key
-                :duct-handler-testing.handler/routing
+(let [hndlr (ig/init-key
+              :duct-handler-testing.handler/routing
 
-                ;; {:db database-stub}
-                {:db {:spec database-stub}}
-                )]
+              ;; {:db database-stub}
+              {:db {:spec database-stub}})]
+
+  (deftest ^:static route-test
 
     (testing "route -not-found-"
       (let[{:keys [status, body]}
@@ -47,8 +47,9 @@
 
         (is (= 200 status))
         (is (= "<span>This is an example handler</span>"
-               body))))
+               body)))))
 
+  (deftest ^:dynamic route-test2
 
     (testing "show-idx page exists"
       (let[{:keys [status, body]}
