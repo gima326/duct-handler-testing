@@ -72,6 +72,34 @@ dev=> (test)
 
 But you can also run tests (with keywords) through Leiningen.
 
+```edn
+;; [  duct-handler-testing/project.clj ]
+
+(defproject duct-handler-testing "0.1.0-SNAPSHOT"
+
+ (中略)
+
+ :profiles
+  {:dev  [:project/dev :profiles/dev]
+   :repl {:prep-tasks   ^:replace ["javac" "compile"]
+          :repl-options {:init-ns user}}
+   :uberjar {:aot :all}
+   :profiles/dev {}
+   :project/dev  {:source-paths   ["dev/src"]
+                  :resource-paths ["dev/resources"]
+                  :dependencies   [[integrant/repl "0.3.2"]
+                                   [hawk "0.2.11"]
+                                   [eftest "0.5.9"]
+
+                                   ;; add
+                                   [phrase "0.3-alpha4"]
+                                   [ring/ring-mock "0.3.2"]
+                                   [com.gearswithingears/shrubbery "0.4.1"]]
+                  ;; add2
+                  :test-selectors {:s :static :d :dynamic}
+                  }})
+```
+
 ```sh
 lein test :s (:d)
 ```
