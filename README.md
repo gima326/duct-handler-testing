@@ -96,12 +96,21 @@ But you can also run tests (with keywords) through Leiningen.
                                    [ring/ring-mock "0.3.2"]
                                    [com.gearswithingears/shrubbery "0.4.1"]]
                   ;; add2
+                  ;; テストコードに追加したキーワード（:static など）と一致させること。
+                  ;; キーワードに該当するテストのみ、部分的に実行できる。
                   :test-selectors {:s :static :d :dynamic}
                   }})
 ```
 
 ```sh
-lein test :s (:d)
+$ lein test :s
+Java HotSpot(TM) 64-Bit Server VM warning: Options -Xverify:none and -noverify were deprecated in JDK 13 and will likely be removed in a future release.
+
+lein test duct-handler-testing.handler.routing-test
+
+Ran 1 tests containing 4 assertions.
+0 failures, 0 errors.
+
 ```
 
 <!---
