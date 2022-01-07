@@ -70,10 +70,10 @@ dev=> (test)
 ...
 ```
 
-But you can also run tests (with keyword) through Leiningen.
+But you can also run tests (with keywords) through Leiningen.
 
 ```sh
-lein test :s
+lein test :s (:d)
 ```
 
 <!---
