@@ -32,6 +32,7 @@
                                    ;; add
                                    [phrase "0.3-alpha4"]
                                    [ring/ring-mock "0.3.2"]
-                                   [com.gearswithingears/shrubbery "0.4.1"]
-
-                                   ]}})
+                                   [com.gearswithingears/shrubbery "0.4.1"]]
+                  ;; add2
+                  :test-selectors {:s :static :d :dynamic}
+                  }})
