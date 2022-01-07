@@ -1,7 +1,8 @@
 (ns duct-handler-testing.boundary.users
   (:require [clojure.java.jdbc :as jdbc]
             [clojure.core :refer [format]]
-            [duct.database.sql]))
+            ;;[duct.database.sql]
+            ))
 
 (defprotocol Users
   (get-users [db])
@@ -11,18 +12,20 @@
   (delete-user [db id]))
 
 (extend-protocol Users
-  duct.database.sql.Boundary
-  (get-users [{:keys [spec]}]
-    (jdbc/query spec ["SELECT * FROM users;"]))
+  ;;duct.database.sql.Boundary
+  clojure.lang.PersistentArrayMap
 
-  (get-user [{:keys [spec]} id]
-   (jdbc/query spec [(format "SELECT * FROM users WHERE id = '%s';" id)]))
+  (get-users [db]
+   (jdbc/query db ["SELECT * FROM users;"]))
 
-  (create-user [{:keys [spec]} params]
-   (jdbc/insert! spec :users {:name (:name params) :age (:age params) :email (:email params)}))
+  (get-user [db id]
+   (jdbc/query db [(format "SELECT * FROM users WHERE id = '%s';" id)]))
 
-  (update-user [{:keys [spec]} id params]
-   (jdbc/update! spec :users {:name (:name params) :age (:age params) :email (:email params)} ["id=?" id]))
+  (create-user [db params]
+   (jdbc/insert! db :users params))
 
-  (delete-user [{:keys [spec]} id]
-   (jdbc/delete! spec :users ["id=?" id])))
+  (update-user [db id params]
+   (jdbc/update! db :users params ["id=?" id]))
+
+  (delete-user [db id]
+   (jdbc/delete! db :users ["id=?" id])))
