@@ -1,6 +1,6 @@
 # duct-handler-testing
 
-Webフレームワーク「Duct」入門サンプルコード、単体テスト編。
+Webフレームワーク「Duct」入門サンプルコード、単体テスト handler 編。
 
 Compojure によるルーティングをテストしてます。<br>
 テスト用の DB アクセスのモックを作成するのに shrubbery を使っています。<br>
