@@ -125,8 +125,10 @@ Copyright © 2021 FIXME
 
 ## References
 
-- 「[clojureのductでcrudアプリを作る方法][1]」 [ `https://asukiaaa.blogspot.com/2017/12/clojureductcrud.html` ]<br>
-- 「[Clojure と Duct の単体テスト][2]」 [ `https://webcache.googleusercontent.com/search?q=cache:wyR4h6_n7VAJ:https://sfkd.hatenablog.com/+&cd=1&hl=ja&ct=clnk&gl=jp&client=firefox-b-d` ]<br>
+- 「[clojureのductでcrudアプリを作る方法][1]」<br>
+　[ `https://asukiaaa.blogspot.com/2017/12/clojureductcrud.html` ]<br>
+- 「[Clojure と Duct の単体テスト][2]」<br>
+　[ `https://webcache.googleusercontent.com/search?q=cache:wyR4h6_n7VAJ:https://sfkd.hatenablog.com/+&cd=1&hl=ja&ct=clnk&gl=jp&client=firefox-b-d` ]<br>
 
 [1]: https://asukiaaa.blogspot.com/2017/12/clojureductcrud.html
 [2]: https://webcache.googleusercontent.com/search?q=cache:wyR4h6_n7VAJ:https://sfkd.hatenablog.com/+&cd=1&hl=ja&ct=clnk&gl=jp&client=firefox-b-d
